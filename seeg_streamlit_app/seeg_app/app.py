@@ -4,6 +4,11 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
+import os
+
+# Chemin absolu vers le fichier CSV (même dossier que app.py)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(BASE_DIR, "seeg_data.csv")
 
 # ============================================================
 # CONFIG PAGE
@@ -88,7 +93,7 @@ st.markdown("""
 # ============================================================
 @st.cache_data
 def charger_donnees():
-    df = pd.read_csv("seeg_data.csv", encoding="utf-8-sig")
+    df = pd.read_csv(DATA_PATH, encoding="utf-8-sig")
     
     # Nettoyer les dates
     df["date"] = pd.to_datetime(df["date"], format="%d/%m/%Y", errors="coerce")
