@@ -414,12 +414,7 @@ with tab2:
         fig_map.update_layout(
             paper_bgcolor="#0a1628",
             font=dict(color="white"),
-            height=480,
-            coloraxis_colorbar=dict(
-                title="IPD",
-                tickfont=dict(color="white"),
-                titlefont=dict(color="white")
-            )
+            height=480
         )
         st.plotly_chart(fig_map, use_container_width=True)
     
@@ -502,7 +497,6 @@ with tab3:
         fig_heat.update_layout(
             paper_bgcolor="#0a1628", font=dict(color="white"),
             height=420,
-            coloraxis_colorbar=dict(tickfont=dict(color="white"), titlefont=dict(color="white"))
         )
         st.plotly_chart(fig_heat, use_container_width=True)
     
