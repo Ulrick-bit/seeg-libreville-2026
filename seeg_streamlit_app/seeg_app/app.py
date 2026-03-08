@@ -463,10 +463,7 @@ with tab2:
     top15 = top15[["Rang", "quartier", "Total", "IPD", "Heures_Cumulées"]].rename(
         columns={"quartier": "Quartier", "Total": "Délestages"}
     )
-    st.dataframe(
-        top15.style.background_gradient(subset=["Délestages", "IPD"], cmap="RdYlGn_r"),
-        use_container_width=True, hide_index=True
-    )
+    st.dataframe(top15, use_container_width=True, hide_index=True)
 
 # ============================================================
 # TAB 3 — VUE TEMPORELLE
@@ -679,13 +676,11 @@ with tab4:
         "Heures": "Heures Cumulées", "Jours": "Jours Touchés"
     })
     
-    st.dataframe(
-        top30[["Rang", "Quartier", "Délestages", "IPD", "Heures Cumulées",
-               "Jours Touchés", "Taux_Presence"]].style
-        .background_gradient(subset=["IPD", "Délestages"], cmap="RdYlGn_r")
-        .format({"IPD": "{:.1f}", "Heures Cumulées": "{:.1f}h", "Taux_Presence": "{:.0f}%"}),
-        use_container_width=True, hide_index=True
-    )
+    top30_display = top30[["Rang", "Quartier", "Délestages", "IPD", "Heures Cumulées", "Jours Touchés", "Taux_Presence"]].copy()
+    top30_display["IPD"] = top30_display["IPD"].map("{:.1f}".format)
+    top30_display["Heures Cumulées"] = top30_display["Heures Cumulées"].map("{:.1f}h".format)
+    top30_display["Taux_Presence"] = top30_display["Taux_Presence"].map("{:.0f}%".format)
+    st.dataframe(top30_display, use_container_width=True, hide_index=True)
 
 # ============================================================
 # FOOTER
